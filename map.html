@@ -534,13 +534,22 @@ function buildPopup(s) {
           <a href="${s.reservation}" target="_blank">${s.reservation_label}</a>
         </div>` : ''}
 
-      <div style="margin-top:10px">
+      <div style="margin-top:10px;display:flex;gap:8px">
+        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(s.name_ja + ' ' + s.address_ja)}"
+           target="_blank"
+           style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+                  padding:9px 6px;background:#4285F4;color:white;border-radius:8px;
+                  font-size:12px;font-weight:700;text-decoration:none;line-height:1.4;text-align:center">
+          📸 사진 보기
+          <span style="font-size:9px;font-weight:400;opacity:0.85">写真を見る</span>
+        </a>
         <a href="https://www.google.com/maps/dir/?api=1&destination=${s.lat},${s.lng}"
            target="_blank"
-           style="display:flex;align-items:center;justify-content:center;gap:8px;
-                  padding:9px 12px;background:#34A853;color:white;border-radius:8px;
-                  font-size:12px;font-weight:700;text-decoration:none">
-          🗺 구글 길찾기 / Googleナビ
+           style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+                  padding:9px 6px;background:#34A853;color:white;border-radius:8px;
+                  font-size:12px;font-weight:700;text-decoration:none;line-height:1.4;text-align:center">
+          🗺 길찾기
+          <span style="font-size:9px;font-weight:400;opacity:0.85">Googleナビ</span>
         </a>
       </div>
     </div>`;

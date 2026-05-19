@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🗾 후쿠오카 여행지도 2026.05</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, 'Noto Sans KR', sans-serif; background: #1a1a2e; }
+
+    #header {
+      background: linear-gradient(135deg, #16213e, #0f3460);
+      color: white;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+    }
+    #header h1 { font-size: 16px; font-weight: 700; }
+    #header span { font-size: 12px; opacity: 0.7; }
+
+    #map { height: calc(100vh - 56px - 130px); width: 100%; }
+
+    #legend {
+      background: #16213e;
+      color: white;
+      padding: 12px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px 16px;
+      align-items: center;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+    }
+    .legend-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    #legend-title {
+      width: 100%;
+      font-size: 11px;
+      opacity: 0.6;
+      margin-bottom: 2px;
+    }
+
+    /* Popup custom styles */
+    .leaflet-popup-content-wrapper {
+      border-radius: 12px !important;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2) !important;
+      padding: 0 !important;
+      overflow: hidden;
+      min-width: 260px;
+    }
+    .leaflet-popup-content { margin: 0 !important; width: auto !important; }
+    .leaflet-popup-tip { background: white !important; }
+
+    .popup-inner { padding: 14px 16px 16px; }
+    .popup-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .popup-category-badge {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .popup-name-ja {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1a1a2e;
+      line-height: 1.3;
+    }
+    .popup-name-ko {
+      font-size: 12px;
+      color: #555;
+      margin-top: 2px;
+      line-height: 1.3;
+    }
+    .popup-divider {
+      height: 1px;
+      background: #f0f0f0;
+      margin: 10px 0;
+    }
+    .popup-desc-ja {
+      font-size: 11px;
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+    .popup-desc-ko {
+      font-size: 12px;
+      color: #333;
+      line-height: 1.5;
+    }
+    .popup-ratings {
+      margin-top: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .rating-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 11px;
+    }
+    .rating-label { color: #777; }
+    .stars { letter-spacing: 1px; }
+    .popup-payment {
+      margin-top: 10px;
+      padding: 7px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .payment-card { background: #e8f4fd; color: #1565c0; }
+    .payment-cash { background: #fff3e0; color: #e65100; }
+    .payment-both { background: #e8f5e9; color: #2e7d32; }
+    .popup-schedule {
+      margin-top: 8px;
+      font-size: 11px;
+      color: #888;
+      padding: 6px 8px;
+      background: #f9f9f9;
+      border-radius: 6px;
+      line-height: 1.5;
+    }
+    .popup-reservation {
+      margin-top: 10px;
+    }
+    .popup-reservation a {
+      display: block;
+      text-align: center;
+      padding: 8px;
+      background: #0f3460;
+      color: white;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-decoration: none;
+    }
+    .popup-reservation a:hover { background: #16213e; }
+    .popup-address {
+      margin-top: 8px;
+      font-size: 10px;
+      color: #aaa;
+    }
+
+    /* Custom marker icons */
+    .custom-marker {
+      width: 36px; height: 36px;
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.3);
+    }
+    .marker-emoji {
+      transform: rotate(45deg);
+      font-size: 16px;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+
+<div id="header">
+  <div>
+    <h1>🗾 후쿠오카 여행지도 — 2026.05.28~30</h1>
+    <span>ZONK HOTEL Nakasu 기점 · 도보 동선 중심</span>
+  </div>
+</div>
+
+<div id="map"></div>
+
+<div id="legend">
+  <div id="legend-title">카테고리</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#2196F3"></div>🏨 숙소</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#795548"></div>☕ 카페·커피</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#E91E63"></div>💄 뷰티·쇼핑</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#FF9800"></div>🍜 맛집·식사</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#9C27B0"></div>🛒 기념품</div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+// ──────────────────────────────────────────────
+// 스팟 데이터
+// ──────────────────────────────────────────────
+const spots = [
+  {
+    id: 'hotel',
+    name_ja: 'ZONK HOTEL Nakasu',
+    name_ko: 'ZONK 호텔 나카스 (숙소)',
+    category: 'hotel',
+    lat: 33.5906, lng: 130.4016,
+    desc_ja: '旅の拠点。中洲に位置し、天神・博多への好アクセス。',
+    desc_ko: '여행 기점. 나카스 중심에 위치, 텐진·하카타 도보 가능.',
+    local_rating: 0,
+    korean_rating: 3,
+    payment: 'card',
+    address_ja: '福岡市博多区中洲',
+    reservation: null,
+    schedule: '체크인: 5/28(목) 16:00\n체크아웃: 5/30(토) 10:00'
+  },
+  {
+    id: 'connect_coffee',
+    name_ja: 'Connect Coffee（コネクトコーヒー）',
+    name_ko: '커넥트 커피',
+    category: 'cafe',
+    lat: 33.5879, lng: 130.3956,
+    desc_ja: 'ラテアート世界大会受賞バリスタが営む自家焙煎スペシャルティコーヒー専門店。白と木のミニマルな空間。カフェラテ570円。',
+    desc_ko: '라떼 아트 세계대회 수상 바리스타 운영. 자가 로스팅 스페셜티. 카페라테 570엔. 조용하고 깔끔한 공간.',
+    local_rating: 5,
+    korean_rating: 2,
+    payment: 'card',
+    address_ja: '福岡市中央区天神5-6-13',
+    schedule: '12:00~22:00 (일·공휴일 11:00~18:00)\n화요일 정기휴무',
+    reservation: null
+  },
+  {
+    id: 'rec_coffee',
+    name_ja: 'REC COFFEE 天神 ONE店',
+    name_ko: 'REC 커피 텐진점',
+    category: 'cafe',
+    lat: 33.5897, lng: 130.3990,
+    desc_ja: '世界バリスタ選手権入賞の福岡発スペシャルティロースター。ONE FUKUOKA BLDG 6F。豆の個性を活かした一杯。',
+    desc_ko: '세계 바리스타 챔피언십 입상 후쿠오카 대표 로스터. 텐진 ONE FUKUOKA BLDG 6층. 출국 전날 아침 추천.',
+    local_rating: 5,
+    korean_rating: 4,
+    payment: 'card',
+    address_ja: '福岡市中央区天神1-11-1 ONE FUKUOKA BLDG 6F',
+    schedule: '월·화·수·금 08:00~20:00\n목 08:00~15:30\n토·일·공휴일 10:00~20:00',
+    reservation: null
+  },
+  {
+    id: 'honey_coffee',
+    name_ja: 'Honey Coffee（ハニー珈琲）天神南店',
+    name_ko: '하니 커피 텐진남점',
+    category: 'cafe',
+    lat: 33.5870, lng: 130.3972,
+    desc_ja: '地元民が長年通うスペシャルティ珈琲専門店。気取らない雰囲気でWi-Fi完備。世界中から仕入れた最上級豆を使用。',
+    desc_ko: '후쿠오카 현지인이 오래 사랑해온 스페셜티 전문점. 부담 없는 분위기, Wi-Fi 완비. 오후 쇼핑 중 휴식에 최적.',
+    local_rating: 4,
+    korean_rating: 2,
+    payment: 'both',
+    address_ja: '天神南駅 徒歩約2分',
+    schedule: '매일 영업 (영업시간 현장 확인)',
+    reservation: null
+  },
+  {
+    id: 'blue_bottle',
+    name_ja: 'Blue Bottle Coffee 福岡天神カフェ',
+    name_ko: '블루보틀 커피 후쿠오카 텐진',
+    category: 'cafe',
+    lat: 33.5885, lng: 130.3967,
+    desc_ja: '警固神社に隣接する特別なロケーション。九州初の常設店。境内の緑を眺めながらコーヒーを楽しめる。',
+    desc_ko: '케고 신사 경내에 위치. 규슈 첫 상설점. 신사 녹음을 보며 마시는 커피가 포인트.',
+    local_rating: 4,
+    korean_rating: 5,
+    payment: 'card',
+    address_ja: '福岡市中央区天神2-2-20 警固神社 事務所ビル1F',
+    schedule: '08:00~20:00 연중무휴',
+    reservation: null
+  },
+  {
+    id: 'iwataya',
+    name_ja: '岩田屋本店（いわたや）',
+    name_ko: '이와타야 백화점 본점',
+    category: 'beauty',
+    lat: 33.5892, lng: 130.3977,
+    desc_ja: '福岡最高級百貨店。本館1Fコスメフロアにて「MAKE UP FOR EVER」が天神唯一出店。RMK・THREE・SUQQUなどプロ向けブランド充実。免税対応あり。',
+    desc_ko: '후쿠오카 최고급 백화점. 1F에 MAKE UP FOR EVER 텐진 유일 입점. RMK·THREE·SUQQU 등 프로 브랜드 집중. 면세 가능.',
+    local_rating: 5,
+    korean_rating: 4,
+    payment: 'card',
+    address_ja: '福岡市中央区天神2-5-35',
+    schedule: '10:00~20:00 연중무휴',
+    reservation: null,
+    note: '면세: 동일 매장 5,000엔 이상 → 세금 10% 환급 / 여권 필지'
+  },
+  {
+    id: 'cosmeteria',
+    name_ja: 'コスメテリア（SOLARIA STAGE内）',
+    name_ko: '코스메테리아 (솔라리아 스테이지)',
+    category: 'beauty',
+    lat: 33.5884, lng: 130.3976,
+    desc_ja: 'KOSE系列のコスメ編集ショップ。「コスメデコルテ」「アディクション」「ジルスチュアート」「THREE」など人気ブランドを一箇所で比較・体験できる。',
+    desc_ko: 'KOSE 계열 편집숍. Cosme Decorte·Addiction·Jill Stuart를 한 공간에서 비교 체험 가능. 텐진역 직결.',
+    local_rating: 4,
+    korean_rating: 3,
+    payment: 'card',
+    address_ja: '天神2-11-3 SOLARIA STAGE内 (西鉄天神駅直結)',
+    schedule: '10:00~20:30',
+    reservation: null
+  },
+  {
+    id: 'daimaru',
+    name_ja: '大丸福岡天神店（だいまる）',
+    name_ko: '다이마루 후쿠오카 텐진점',
+    category: 'beauty',
+    lat: 33.5900, lng: 130.3991,
+    desc_ja: '2Fのコスメ・ビューティーフロアに資生堂・コーセー・カネボウなど主要ブランド揃う。コスメデコルテも出店。',
+    desc_ko: '코스메 플로어 충실. 시세이도·코세·가네보 계열 집결. 이와타야와 비교 쇼핑 가능.',
+    local_rating: 4,
+    korean_rating: 4,
+    payment: 'card',
+    address_ja: '福岡市中央区天神1-4-1',
+    schedule: '10:00~20:00',
+    reservation: null
+  },
+  {
+    id: 'ikke_haruyoshi',
+    name_ja: 'もつ鍋 一慶 春吉本店（いっけい）',
+    name_ko: '모츠나베 이케이 하루요시 본점',
+    category: 'food',
+    lat: 33.5873, lng: 130.4028,
+    desc_ja: '国産和牛の小腸のみを厳選使用。モツ特有の臭みゼロ。秘伝の醤油スープで脂の甘みを堪能。地元の食通が通う名店。',
+    desc_ko: '국산 화우 소장만 엄선. 잡내 제로. 간장 스프로 담백한 모츠나베. 현지 미식가 단골. 締め(시메) 필수.',
+    local_rating: 5,
+    korean_rating: 2,
+    payment: 'both',
+    address_ja: '福岡市中央区春吉2-10-14',
+    schedule: '15:00~翌1:00 (연중무휴)',
+    reservation: 'https://www.hotpepper.jp/strJ000028171/',
+    reservation_label: '🍽 ホットペッパーで予約 (예약하기)'
+  },
+  {
+    id: 'rakutenti',
+    name_ja: '元祖もつ鍋 楽天地 天神総本店（らくてんち）',
+    name_ko: '원조 모츠나베 라쿠텐치 텐진 총본점',
+    category: 'food',
+    lat: 33.5864, lng: 130.3975,
+    desc_ja: '創業48年。博多もつ鍋の元祖。6種の国産生もつと九州産野菜。おかみさん特製の秘伝醤油スープ。270席の大型店。',
+    desc_ko: '창업 48년 모츠나베 원조. 6종 국산 생모츠, 규슈산 채소. 안주인 특제 비전 간장 스프. 270석 대형점.',
+    local_rating: 5,
+    korean_rating: 4,
+    payment: 'both',
+    address_ja: '福岡市中央区今泉（天神）',
+    schedule: '연중무휴 (영업시간 현장 확인)',
+    reservation: 'https://www.hotpepper.jp/strJ001178005/',
+    reservation_label: '🍽 ホットペッパーで予約 (예약하기)'
+  },
+  {
+    id: 'yatai',
+    name_ja: '中洲屋台街（なかすやたいがい）',
+    name_ko: '나카스 야타이(포장마차) 거리',
+    category: 'food',
+    lat: 33.5912, lng: 130.4009,
+    desc_ja: '那珂川沿いに軒を連ねる博多の名物屋台群。焼き鳥・おでん・ラーメン・明太チーズ巻きなど。生ビールで締め括る福岡の夜の風物詩。',
+    desc_ko: '나카스강변 하카타 명물 포장마차 거리. 야키토리·오뎅·라멘·나마비루. 숙소 도보 5분. 첫날 저녁 강추.',
+    local_rating: 4,
+    korean_rating: 5,
+    payment: 'cash',
+    address_ja: '博多区中洲 那珂川沿い',
+    schedule: '저녁 18:00경~ / 우천 시 휴업 가능',
+    reservation: null,
+    note: '⚠️ 현금 전용! 1인 2,000~3,000엔 예상'
+  },
+  {
+    id: 'hakata_station_souvenir',
+    name_ja: '博多駅 アミュプラザ・お土産ゾーン',
+    name_ko: '하카타역 아뮤플라자 기념품 구역',
+    category: 'souvenir',
+    lat: 33.5898, lng: 130.4207,
+    desc_ja: '山や（明太子）・福砂屋（カステラ）・博多通りもん・ふくやなど福岡名物が一堂に揃う。出発前に立ち寄れる最終買い物スポット。',
+    desc_ko: '야마야(명란)·후쿠사야(카스테라)·하카타 토리몬·후쿠야 한자리. 출국 전 마지막 쇼핑. 지하철로 나카스에서 10분.',
+    local_rating: 3,
+    korean_rating: 5,
+    payment: 'card',
+    address_ja: '福岡市博多区博多駅中央街1-1',
+    schedule: '10:00~21:00',
+    reservation: null
+  }
+];
+
+// ──────────────────────────────────────────────
+// 카테고리 설정
+// ──────────────────────────────────────────────
+const categoryConfig = {
+  hotel:    { color: '#2196F3', emoji: '🏨', label: '숙소' },
+  cafe:     { color: '#795548', emoji: '☕', label: '카페·커피' },
+  beauty:   { color: '#E91E63', emoji: '💄', label: '뷰티·쇼핑' },
+  food:     { color: '#FF9800', emoji: '🍜', label: '맛집·식사' },
+  souvenir: { color: '#9C27B0', emoji: '🛒', label: '기념품' }
+};
+
+const paymentConfig = {
+  card: { icon: '💳', text: '카드 결제 가능 / カード払いOK', cls: 'payment-card' },
+  cash: { icon: '💴', text: '현금 전용 / 現金のみ', cls: 'payment-cash' },
+  both: { icon: '💳💴', text: '카드·현금 모두 가능 / カード・現金両方OK', cls: 'payment-both' }
+};
+
+// ──────────────────────────────────────────────
+// 별점 렌더링
+// ──────────────────────────────────────────────
+function renderStars(n) {
+  if (n === 0) return '<span style="color:#ccc">평가없음</span>';
+  return '★'.repeat(n) + '☆'.repeat(5 - n);
+}
+
+// ──────────────────────────────────────────────
+// 팝업 HTML 생성
+// ──────────────────────────────────────────────
+function buildPopup(s) {
+  const cat = categoryConfig[s.category];
+  const pay = paymentConfig[s.payment];
+
+  const badgeColor = cat.color + '22';
+  const badgeText = cat.color;
+
+  let html = `
+    <div class="popup-inner">
+      <div class="popup-header">
+        <div style="flex:1">
+          <div class="popup-name-ja">${cat.emoji} ${s.name_ja}</div>
+          <div class="popup-name-ko">${s.name_ko}</div>
+        </div>
+        <div class="popup-category-badge" style="background:${badgeColor};color:${badgeText}">
+          ${cat.label}
+        </div>
+      </div>
+
+      <div class="popup-divider"></div>
+
+      <div class="popup-desc-ja">${s.desc_ja}</div>
+      <div class="popup-desc-ko">${s.desc_ko}</div>
+
+      ${s.note ? `<div class="popup-schedule" style="background:#fff8e1;color:#e65100">${s.note}</div>` : ''}
+
+      <div class="popup-ratings">
+        <div class="rating-row">
+          <span class="rating-label">🇯🇵 현지인 인기도</span>
+          <span class="stars" style="color:#FF9800">${renderStars(s.local_rating)}</span>
+        </div>
+        <div class="rating-row">
+          <span class="rating-label">🇰🇷 한국 인지도</span>
+          <span class="stars" style="color:#4FC3F7">${renderStars(s.korean_rating)}</span>
+        </div>
+      </div>
+
+      <div class="popup-payment ${pay.cls}">
+        ${pay.icon}&nbsp;${pay.text}
+      </div>
+
+      <div class="popup-schedule">${s.schedule.replace(/\n/g,'<br/>')}</div>
+      <div class="popup-address">📍 ${s.address_ja}</div>
+
+      ${s.reservation ? `
+        <div class="popup-reservation">
+          <a href="${s.reservation}" target="_blank">${s.reservation_label}</a>
+        </div>` : ''}
+    </div>`;
+  return html;
+}
+
+// ──────────────────────────────────────────────
+// 커스텀 마커 아이콘
+// ──────────────────────────────────────────────
+function makeIcon(category) {
+  const cat = categoryConfig[category];
+  const html = `
+    <div style="
+      width:36px;height:36px;
+      background:${cat.color};
+      border-radius:50% 50% 50% 0;
+      transform:rotate(-45deg);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 3px 8px rgba(0,0,0,0.35);
+      border:2px solid white;
+    ">
+      <span style="transform:rotate(45deg);font-size:15px;line-height:1">${cat.emoji}</span>
+    </div>`;
+  return L.divIcon({
+    html,
+    className: '',
+    iconSize: [36, 36],
+    iconAnchor: [18, 36],
+    popupAnchor: [0, -38]
+  });
+}
+
+// ──────────────────────────────────────────────
+// 지도 초기화
+// ──────────────────────────────────────────────
+const map = L.map('map', {
+  center: [33.5893, 130.4000],
+  zoom: 15,
+  zoomControl: true
+});
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+  maxZoom: 19
+}).addTo(map);
+
+// 스팟 마커 추가
+spots.forEach(s => {
+  const marker = L.marker([s.lat, s.lng], { icon: makeIcon(s.category) }).addTo(map);
+  marker.bindPopup(buildPopup(s), { maxWidth: 300, minWidth: 260 });
+});
+
+// 숙소 기점 강조 원
+L.circle([33.5906, 130.4016], {
+  color: '#2196F3',
+  fillColor: '#2196F3',
+  fillOpacity: 0.06,
+  radius: 700,
+  dashArray: '6 4',
+  weight: 1.5
+}).addTo(map).bindTooltip('도보 약 15분 반경', { permanent: false });
+</script>
+</body>
+</html>

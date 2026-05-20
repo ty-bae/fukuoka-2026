@@ -1,0 +1,846 @@
+/* -------------------------------------------------------------
+ * Fukuoka Travel Web App - Design System & Stylesheet
+ * Premium Coffee & Beauty Theme (Sleek Dark Mode)
+ * ------------------------------------------------------------- */
+
+/* Variables & Theme Tokens */
+:root {
+    --bg-dark: #121214;
+    --bg-surface: #1e1e24;
+    --bg-card: rgba(30, 30, 36, 0.7);
+    --border-color: rgba(255, 255, 255, 0.08);
+    
+    --primary: #d4a373; /* Latte Brown */
+    --primary-light: #e6ccb2;
+    --accent-beauty: #c084fc; /* Lavender Purple */
+    
+    --text-main: #f3f4f6;
+    --text-muted: #9ca3af;
+    --text-gold: #e9c46a;
+    
+    --glass-blur: blur(12px);
+    --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset & Global Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    font-family: 'Outfit', 'Noto Sans KR', sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 480px; /* Mobile focused max-width */
+    background-color: var(--bg-dark);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    padding-bottom: 40px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    position: relative;
+}
+
+/* Typography & Badges */
+h1 {
+    font-weight: 800;
+    font-size: 2.2rem;
+    letter-spacing: -0.5px;
+    background: linear-gradient(135deg, var(--primary-light), var(--primary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-top: 4px;
+}
+
+h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+    color: var(--text-main);
+}
+
+h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.text-gold {
+    color: var(--text-gold);
+}
+
+.badge {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    background-color: rgba(212, 163, 115, 0.15);
+    color: var(--primary);
+    padding: 4px 10px;
+    border-radius: 50px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+/* Header & Toolbar */
+.app-header {
+    margin-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 16px;
+}
+
+.app-header p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+.quick-toolbar {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+}
+
+.tool-btn {
+    flex: 1;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 10px;
+    border-radius: var(--radius-sm);
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+.tool-btn:active {
+    transform: scale(0.97);
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.tool-btn i {
+    font-size: 0.95rem;
+    color: var(--primary);
+}
+
+/* Quick Utility Cards (Calc & Checklist) */
+.quick-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    animation: slideDown 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.quick-card.hidden {
+    display: none;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.close-card-btn {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 4px;
+}
+
+/* Exchange Calc Styles */
+.calc-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.input-group label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.input-group input {
+    background-color: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    color: #fff;
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    font-size: 1.1rem;
+    font-weight: 600;
+    font-family: 'Outfit', sans-serif;
+    outline: none;
+    transition: var(--transition);
+}
+
+.input-group input:focus {
+    border-color: var(--primary);
+}
+
+.calc-divider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-muted);
+    font-size: 1rem;
+    margin: 4px 0;
+}
+
+.calc-rate-info {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 4px;
+}
+
+/* Checklist Styles */
+.checklist-body {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.check-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 12px;
+    background-color: rgba(255, 255, 255, 0.02);
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.check-item:active {
+    background-color: rgba(255, 255, 255, 0.04);
+}
+
+.check-item input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 4px;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+}
+
+.check-item input[type="checkbox"]:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.check-item input[type="checkbox"]:checked::after {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--bg-dark);
+    font-size: 0.75rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.check-item label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    user-select: none;
+    flex: 1;
+}
+
+.check-item input[type="checkbox"]:checked + label {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+/* Section Title */
+.section-title {
+    margin-bottom: 16px;
+}
+
+.section-title p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+/* Map & Hotspots Styles */
+.map-section {
+    margin-bottom: 28px;
+}
+
+.map-container {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    position: relative;
+    border: 1px solid var(--border-color);
+    background-color: #f7f3ec; /* Watercolor base color fallback */
+}
+
+.fukuoka-map-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Marker Pins */
+.pin-marker {
+    position: absolute;
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    border: 2px solid #fff;
+    color: #fff;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    z-index: 10;
+    outline: none;
+    transform: translate(-50%, -50%);
+    transition: var(--transition);
+}
+
+.pin-marker:active {
+    transform: translate(-50%, -50%) scale(1.15);
+}
+
+.cafe-pin {
+    background-color: var(--primary);
+}
+
+.beauty-pin {
+    background-color: var(--accent-beauty);
+}
+
+/* Pulse animation rings */
+.pin-pulse {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    pointer-events: none;
+    animation: pinPulse 2s infinite ease-out;
+}
+
+.cafe-pin .pin-pulse {
+    box-shadow: 0 0 0 10px rgba(212, 163, 115, 0.4);
+}
+
+.beauty-pin .pin-pulse {
+    box-shadow: 0 0 0 10px rgba(192, 132, 252, 0.4);
+}
+
+@keyframes pinPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(2.2);
+        opacity: 0;
+    }
+}
+
+/* Spot Detail Card (Modal inside app) */
+.spot-detail-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    margin-top: 14px;
+    box-shadow: var(--shadow);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    position: relative;
+    overflow: hidden;
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+.spot-detail-card.hidden {
+    display: none;
+}
+
+.close-spot-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: rgba(0, 0, 0, 0.4);
+    border: none;
+    color: #fff;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    cursor: pointer;
+    z-index: 5;
+    transition: var(--transition);
+}
+
+.close-spot-btn:active {
+    transform: scale(0.9);
+}
+
+.spot-card-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.spot-img-container {
+    width: 100%;
+    height: 180px;
+    position: relative;
+    overflow: hidden;
+}
+
+.spot-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.spot-category {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: var(--primary-light);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 50px;
+    text-transform: uppercase;
+}
+
+.spot-text-container {
+    padding: 16px;
+}
+
+.spot-text-container h3 {
+    font-size: 1.25rem;
+    margin-bottom: 6px;
+    font-weight: 700;
+}
+
+.spot-menu {
+    font-size: 0.85rem;
+    margin-bottom: 10px;
+    color: var(--text-main);
+    background-color: rgba(255,255,255,0.03);
+    padding: 8px 12px;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+    border: 1px solid rgba(255,255,255,0.02);
+}
+
+.spot-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+}
+
+.spot-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.spot-day-badge {
+    background-color: rgba(255,255,255,0.06);
+    color: var(--text-main);
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.map-link-btn {
+    background-color: var(--primary);
+    color: var(--bg-dark);
+    padding: 8px 16px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: var(--transition);
+}
+
+.map-link-btn:active {
+    background-color: var(--primary-light);
+    transform: scale(0.97);
+}
+
+/* Timeline & Plan Styles */
+.itinerary-section {
+    margin-bottom: 24px;
+}
+
+/* Filters & Tabs */
+.filter-bar {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.filter-btn {
+    flex: 1;
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 8px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.filter-btn.active {
+    background-color: var(--bg-surface);
+    border-color: var(--text-muted);
+    color: var(--text-main);
+}
+
+.day-tabs {
+    display: flex;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.tab-btn {
+    flex: 1;
+    background-color: var(--bg-surface);
+    border: none;
+    color: var(--text-muted);
+    padding: 12px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Outfit', sans-serif;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.tab-btn.active {
+    background-color: var(--primary);
+    color: var(--bg-dark);
+}
+
+.day-plan {
+    display: none;
+    flex-direction: column;
+    animation: fadeIn 0.4s ease-out forwards;
+}
+
+.day-plan.active {
+    display: flex;
+}
+
+/* Timeline Items */
+.timeline-container {
+    position: relative;
+    padding-left: 20px;
+}
+
+.timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 5px;
+    bottom: 5px;
+    left: 6px;
+    width: 2px;
+    background-color: var(--border-color);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 24px;
+    display: flex;
+    gap: 16px;
+}
+
+.timeline-item:last-child {
+    margin-bottom: 0;
+}
+
+/* Timeline icons and checkboxes */
+.timeline-checkbox {
+    margin-top: 4px;
+}
+
+.timeline-checkbox input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--border-color);
+    border-radius: 50%;
+    outline: none;
+    cursor: pointer;
+    position: relative;
+    transition: var(--transition);
+}
+
+.timeline-checkbox input[type="checkbox"]:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.timeline-checkbox input[type="checkbox"]:checked::after {
+    content: "\f00c";
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: var(--bg-dark);
+    font-size: 0.65rem;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.timeline-icon {
+    position: absolute;
+    left: -20px;
+    top: 2px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--border-color);
+    border: 2px solid var(--bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0;
+}
+
+.timeline-header-node .timeline-icon {
+    width: 24px;
+    height: 24px;
+    left: -25px;
+    background-color: #fff;
+    color: var(--bg-dark);
+    font-size: 0.85rem;
+}
+
+.timeline-icon.cafe {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+
+.timeline-icon.beauty {
+    background-color: var(--accent-beauty);
+    border-color: var(--accent-beauty);
+}
+
+/* Content block */
+.timeline-content {
+    flex: 1;
+    background-color: var(--bg-surface);
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+
+.timeline-item.checked .timeline-content {
+    opacity: 0.5;
+    background-color: rgba(30, 30, 36, 0.3);
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 6px;
+}
+
+.content-header h4 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.timeline-content h4 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.timeline-content .time {
+    font-size: 0.8rem;
+    color: var(--primary-light);
+    font-weight: 600;
+}
+
+.timeline-content .desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+.timeline-content .menu-highlight {
+    font-size: 0.8rem;
+    color: var(--text-gold);
+    background-color: rgba(0,0,0,0.15);
+    padding: 6px 10px;
+    border-radius: var(--radius-sm);
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.timeline-content .actions {
+    display: flex;
+    gap: 8px;
+}
+
+.view-on-map-btn {
+    background: none;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    padding: 6px 12px;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.view-on-map-btn:active {
+    background-color: rgba(212, 163, 115, 0.1);
+}
+
+.gmap-link {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 6px 12px;
+}
+
+.tag {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 50px;
+    text-transform: uppercase;
+}
+
+.tag-cafe {
+    background-color: rgba(212, 163, 115, 0.15);
+    color: var(--primary);
+}
+
+.tag-beauty {
+    background-color: rgba(192, 132, 252, 0.15);
+    color: var(--accent-beauty);
+}
+
+/* Footer */
+.app-footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+}
+
+.app-footer p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.footer-sub {
+    font-size: 0.7rem !important;
+    margin-top: 4px;
+}
+
+/* Keyframe Animations */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Media query adjustments (mostly safety margins for larger views) */
+@media (min-width: 480px) {
+    body {
+        padding: 20px 0;
+    }
+    
+    .app-container {
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-color);
+        min-height: calc(100vh - 40px);
+    }
+}

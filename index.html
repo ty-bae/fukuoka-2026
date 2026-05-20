@@ -1,8 +1,327 @@
 <!DOCTYPE html>
-<html><head>
-<meta http-equiv="refresh" content="0; url=map.html">
-<meta charset="UTF-8">
-<title>후쿠오카 여행지도</title>
-</head><body>
-<script>location.replace('map.html');</script>
-</body></html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>후쿠오카 여행 인터랙티브 가이드</title>
+    
+    <!-- Google Fonts & FontAwesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-content">
+                <span class="badge">MAY 28 - MAY 30</span>
+                <h1>Fukuoka Trip</h1>
+                <p>라떼 & 베이커리 & 뷰티 매니아를 위한 로컬 가이드</p>
+            </div>
+            
+            <!-- Quick Stats & Calculator Toggle -->
+            <div class="quick-toolbar">
+                <button class="tool-btn" id="calcToggleBtn">
+                    <i class="fa-solid fa-calculator"></i> 엔화 계산기
+                </button>
+                <button class="tool-btn" id="checklistToggleBtn">
+                    <i class="fa-solid fa-list-check"></i> 체크리스트
+                </button>
+            </div>
+        </header>
+
+        <!-- Exchange Calculator (Modal-like card) -->
+        <section class="quick-card calc-card hidden" id="exchangeCalcCard">
+            <div class="card-header">
+                <h3><i class="fa-solid fa-coins text-gold"></i> 실시간 엔화 계산기</h3>
+                <button class="close-card-btn" id="closeCalcBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="calc-body">
+                <div class="input-group">
+                    <label for="jpyInput">엔화 (¥)</label>
+                    <input type="number" id="jpyInput" placeholder="0" min="0">
+                </div>
+                <div class="calc-divider">
+                    <i class="fa-solid fa-arrow-right-arrow-left"></i>
+                </div>
+                <div class="input-group">
+                    <label for="krwInput">원화 (₩)</label>
+                    <input type="number" id="krwInput" placeholder="0" min="0">
+                </div>
+                <p class="calc-rate-info">환율 기준: 100엔 = 900원 고정 계산 (커스텀 수정 가능)</p>
+            </div>
+        </section>
+
+        <!-- Travel Checklist (Modal-like card) -->
+        <section class="quick-card checklist-card hidden" id="travelChecklistCard">
+            <div class="card-header">
+                <h3><i class="fa-solid fa-clipboard-check text-gold"></i> 필수 준비물 체크리스트</h3>
+                <button class="close-card-btn" id="closeChecklistBtn"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div class="checklist-body">
+                <div class="check-item">
+                    <input type="checkbox" id="chk-passport">
+                    <label for="chk-passport">여권 & 항공권 바코드</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk-travelog">
+                    <label for="chk-travelog">트래블로그 카드 (엔화 충전)</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk-piggy">
+                    <label for="chk-piggy">현금 (일부 로컬 빵집 엔화 현금 필수)</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk-spa">
+                    <label for="chk-spa">헤드스파 사전 예약 확인</label>
+                </div>
+                <div class="check-item">
+                    <input type="checkbox" id="chk-esim">
+                    <label for="chk-esim">일본 eSIM/로밍 설정</label>
+                </div>
+            </div>
+        </section>
+
+        <!-- Map & Hotspot Section -->
+        <section class="map-section">
+            <div class="section-title">
+                <h2>🗺️ 인터랙티브 동선 지도</h2>
+                <p>마커를 터치하여 장소 정보를 확인하세요.</p>
+            </div>
+            
+            <div class="map-container">
+                <img src="assets/fukuoka_travel_map.png" alt="Fukuoka Travel Map" class="fukuoka-map-img">
+                
+                <!-- Pins Overlay -->
+                <!-- Akasaka (BIOTOP) -->
+                <button class="pin-marker beauty-pin" style="top: 31%; left: 25%;" data-spot="akasaka">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </button>
+                
+                <!-- Nishinakasu (pain stock & Coffee County) -->
+                <button class="pin-marker cafe-pin" style="top: 31%; left: 81%;" data-spot="nishinakasu">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-mug-hot"></i>
+                </button>
+                
+                <!-- Ropponmatsu (Matsupang & Coffee Man) -->
+                <button class="pin-marker cafe-pin" style="top: 83%; left: 23%;" data-spot="ropponmatsu">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-mug-hot"></i>
+                </button>
+                
+                <!-- Takasago (Good up Coffee) -->
+                <button class="pin-marker cafe-pin" style="top: 83%; left: 81%;" data-spot="takasago">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-mug-hot"></i>
+                </button>
+            </div>
+
+            <!-- Interactive Spot Popup/Card -->
+            <div class="spot-detail-card hidden" id="spotDetailCard">
+                <button class="close-spot-btn" id="closeSpotCardBtn"><i class="fa-solid fa-xmark"></i></button>
+                <div class="spot-card-content">
+                    <div class="spot-img-container">
+                        <img src="" alt="" id="spotImg">
+                        <span class="spot-category" id="spotCategory">Cafe</span>
+                    </div>
+                    <div class="spot-text-container">
+                        <h3 id="spotName">가게 이름</h3>
+                        <p class="spot-menu"><i class="fa-solid fa-bread-slice text-gold"></i> <strong id="spotMenuText">대표 메뉴</strong></p>
+                        <p class="spot-desc" id="spotDesc">가게에 대한 상세 리서치 설명글이 이곳에 들어갑니다.</p>
+                        <div class="spot-actions">
+                            <span class="spot-day-badge" id="spotDayBadge">Day 2</span>
+                            <a href="" target="_blank" class="map-link-btn" id="spotMapLink">
+                                <i class="fa-solid fa-location-dot"></i> 구글맵 길찾기
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Timeline / Daily Plan Section -->
+        <section class="itinerary-section">
+            <div class="section-title">
+                <h2>📅 일정별 상세 루트</h2>
+                <p>방문한 장소를 체크하며 이동 경로를 따라가 보세요.</p>
+            </div>
+
+            <!-- Filter Buttons -->
+            <div class="filter-bar">
+                <button class="filter-btn active" data-filter="all">전체</button>
+                <button class="filter-btn" data-filter="cafe"><i class="fa-solid fa-mug-hot"></i> 카페/빵</button>
+                <button class="filter-btn" data-filter="beauty"><i class="fa-solid fa-wand-magic-sparkles"></i> 뷰티/스파</button>
+            </div>
+
+            <!-- Day Tab navigation -->
+            <div class="day-tabs">
+                <button class="tab-btn active" data-day="day1">Day 1</button>
+                <button class="tab-btn" data-day="day2">Day 2</button>
+                <button class="tab-btn" data-day="day3">Day 3</button>
+            </div>
+
+            <!-- Day Plans Container -->
+            <div class="timeline-container">
+                <!-- Day 1 Plan -->
+                <div class="day-plan active" id="plan-day1">
+                    <div class="timeline-item timeline-header-node">
+                        <div class="timeline-icon"><i class="fa-solid fa-plane-arrival"></i></div>
+                        <div class="timeline-content">
+                            <h4>후쿠오카 입국</h4>
+                            <p class="time">13:00 - 입국 수속 및 지하철 이동</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" data-category="cafe" data-spot-id="nishinakasu">
+                        <div class="timeline-checkbox">
+                            <input type="checkbox" id="task-d1-1">
+                        </div>
+                        <div class="timeline-icon cafe"><i class="fa-solid fa-mug-hot"></i></div>
+                        <div class="timeline-content">
+                            <div class="content-header">
+                                <h4>팡 스톡 & 커피 카운티 니시나카스점</h4>
+                                <span class="tag tag-cafe">카페 & 빵</span>
+                            </div>
+                            <p class="desc">후쿠오카 3대 빵집과 스페셜티 로스터리의 맛있는 콜라보. 명란 바게트와 부드러운 라떼로 첫날 오후 피로를 풀어보세요.</p>
+                            <p class="menu-highlight">대표 메뉴: 명란 바게트, 카카오 빵 & 카페 라떼</p>
+                            <div class="actions">
+                                <button class="view-on-map-btn" data-spot="nishinakasu">지도에서 보기</button>
+                                <a href="https://maps.google.com/?q=pain+stock+Nishinakasu" target="_blank" class="gmap-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Google Maps</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-checkbox">
+                            <input type="checkbox" id="task-d1-2">
+                        </div>
+                        <div class="timeline-icon hotel"><i class="fa-solid fa-hotel"></i></div>
+                        <div class="timeline-content">
+                            <h4>체크인 & 저녁 식사</h4>
+                            <p class="desc">숙소(야쿠인/텐진/하카타 인근) 체크인 후 주변 로컬 이자카야 또는 명란 요리 전문점에서 저녁 식사.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 2 Plan -->
+                <div class="day-plan" id="plan-day2">
+                    <div class="timeline-item" data-category="cafe" data-spot-id="ropponmatsu">
+                        <div class="timeline-checkbox">
+                            <input type="checkbox" id="task-d2-1">
+                        </div>
+                        <div class="timeline-icon cafe"><i class="fa-solid fa-mug-hot"></i></div>
+                        <div class="timeline-content">
+                            <div class="content-header">
+                                <h4>마츠빵 & 커피맨 (롯폰마츠)</h4>
+                                <span class="tag tag-cafe">카페 & 빵</span>
+                            </div>
+                            <p class="desc">현지인들이 줄 서는 작은 빵집 마츠빵에서 빵을 사서, 바로 옆 일본 커피 로스팅 챔피언이 내려주는 깊은 풍미의 카페 라떼와 함께 모닝 식사.</p>
+                            <p class="menu-highlight">대표 메뉴: 소금빵, 연유빵 & 에스프레소 라떼</p>
+                            <div class="actions">
+                                <button class="view-on-map-btn" data-spot="ropponmatsu">지도에서 보기</button>
+                                <a href="https://maps.google.com/?q=Matsupang+Fukuoka" target="_blank" class="gmap-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Google Maps</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" data-category="beauty" data-spot-id="akasaka">
+                        <div class="timeline-checkbox">
+                            <input type="checkbox" id="task-d2-2">
+                        </div>
+                        <div class="timeline-icon beauty"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <div class="timeline-content">
+                            <div class="content-header">
+                                <h4>비오톱 후쿠오카 (BIOTOP FUKUOKA)</h4>
+                                <span class="tag tag-beauty">뷰티 쇼핑</span>
+                            </div>
+                            <p class="desc">도심 속 가든 감성의 3층 규모 편집숍. 1층 뷰티 코너에서 이솝, 딥티크 및 현지 유기농 뷰티 화장품 쇼핑. 3층 루프탑 카페에서 한적하게 티타임 가능.</p>
+                            <p class="menu-highlight">추천 쇼핑: 니치 오가닉 스킨케어 & 디퓨저</p>
+                            <div class="actions">
+                                <button class="view-on-map-btn" data-spot="akasaka">지도에서 보기</button>
+                                <a href="https://maps.google.com/?q=BIOTOP+FUKUOKA" target="_blank" class="gmap-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Google Maps</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" data-category="cafe" data-spot-id="takasago">
+                        <div class="timeline-checkbox">
+                            <input type="checkbox" id="task-d2-3">
+                        </div>
+                        <div class="timeline-icon cafe"><i class="fa-solid fa-mug-hot"></i></div>
+                        <div class="timeline-content">
+                            <div class="content-header">
+                                <h4>굿 업 커피 (Good up Coffee)</h4>
+                                <span class="tag tag-cafe">카페 & 빵</span>
+                            </div>
+                            <p class="desc">타카사고 골목길의 인스타 감성 힐링 공간. 도톰한 통식빵 위에 수제 팥앙금과 버터 조각을 얹은 앙버터 토스트, 그리고 쫀쫀한 스팀 밀크 라떼 조합.</p>
+                            <p class="menu-highlight">대표 메뉴: 단팥 앙버터 토스트 & 고소한 카페 라떼</p>
+                            <div class="actions">
+                                <button class="view-on-map-btn" data-spot="takasago">지도에서 보기</button>
+                                <a href="https://maps.google.com/?q=Good+up+Coffee+Fukuoka" target="_blank" class="gmap-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Google Maps</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" data-category="beauty">
+                        <div class="timeline-checkbox">
+                            <input type="checkbox" id="task-d2-4">
+                        </div>
+                        <div class="timeline-icon beauty"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <div class="timeline-content">
+                            <div class="content-header">
+                                <h4>코스메 키친 & 백화점 쇼핑 (텐진)</h4>
+                                <span class="tag tag-beauty">뷰티 쇼핑</span>
+                            </div>
+                            <p class="desc">텐진 파르코의 코스메 키친에서 천연 메이크업 브랜드(셀보크, 투원)를 둘러보고, 이와타야 백화점에서 SHIRO 사봉 향수 및 THREE 클렌징 오일 득템.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Day 3 Plan -->
+                <div class="day-plan" id="plan-day3">
+                    <div class="timeline-item" data-category="beauty">
+                        <div class="timeline-checkbox">
+                            <input type="checkbox" id="task-d3-1">
+                        </div>
+                        <div class="timeline-icon beauty"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <div class="timeline-content">
+                            <div class="content-header">
+                                <h4>헤드 컨시어지 후쿠오카점 (텐진)</h4>
+                                <span class="tag tag-beauty">헤드스파 힐링</span>
+                            </div>
+                            <p class="desc">여행의 피로를 싹 씻어줄 궁극의 수면 헤드스파. 텐진 다이묘 거리에서 스파 관리를 받으며 모발 두피 정화 및 릴렉싱 타임.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-checkbox">
+                            <input type="checkbox" id="task-d3-2">
+                        </div>
+                        <div class="timeline-icon airport"><i class="fa-solid fa-plane-departure"></i></div>
+                        <div class="timeline-content">
+                            <h4>공항 이동 & 출국</h4>
+                            <p class="desc">하카타역 또는 텐진역에서 공항선 지하철 탑승 후 후쿠오카 공항 이동, 면세점 쇼핑 후 출국.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="app-footer">
+            <p>Made for Fukuoka Travel 2026. Have a nice trip!</p>
+            <p class="footer-sub">이 가이드는 모바일에 최적화되어 오프라인에서도 작동합니다.</p>
+        </footer>
+    </div>
+
+    <!-- Custom JS -->
+    <script src="app.js"></script>
+</body>
+</html>

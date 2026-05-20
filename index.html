@@ -91,7 +91,12 @@
         <section class="map-section">
             <div class="section-title">
                 <h2>🗺️ 인터랙티브 동선 지도</h2>
-                <p>마커를 터치하여 장소 정보를 확인하세요.</p>
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                    <p>마커를 터치하여 장소 정보를 확인하세요.</p>
+                    <a href="map.html" target="_blank" class="gps-map-link" style="font-size: 0.8rem; color: var(--primary); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; gap: 4px; padding: 4px 8px; background-color: rgba(212, 163, 115, 0.1); border-radius: 50px;">
+                        <i class="fa-solid fa-earth-asia"></i> 전체 화면 GPS 지도
+                    </a>
+                </div>
             </div>
             
             <div class="map-container">
@@ -120,6 +125,78 @@
                 <button class="pin-marker cafe-pin" style="top: 83%; left: 81%;" data-spot="takasago">
                     <span class="pin-pulse"></span>
                     <i class="fa-solid fa-mug-hot"></i>
+                </button>
+
+                <!-- Ainz & Tulpe Tenjin Nishidori (Beauty Makeup) -->
+                <button class="pin-marker beauty-pin" style="top: 48%; left: 45%;" data-spot="ainz_tulpe">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </button>
+                
+                <!-- Iwataya Main Store (Beauty Makeup) -->
+                <button class="pin-marker beauty-pin" style="top: 42%; left: 53%;" data-spot="iwataya">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </button>
+                
+                <!-- Cosmeteria Solaria Stage (Beauty Makeup) -->
+                <button class="pin-marker beauty-pin" style="top: 45%; left: 58%;" data-spot="cosmeteria">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </button>
+                
+                <!-- Motsunabe Ikkei Haruyoshi (Food) -->
+                <button class="pin-marker food-pin" style="top: 55%; left: 88%;" data-spot="ikke_haruyoshi">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-utensils"></i>
+                </button>
+                
+                <!-- Nakasu Yatai Street (Food) -->
+                <button class="pin-marker food-pin" style="top: 25%; left: 92%;" data-spot="yatai">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-utensils"></i>
+                </button>
+                
+                <!-- Rakutenti Tenjin (Food) -->
+                <button class="pin-marker food-pin" style="top: 62%; left: 50%;" data-spot="rakutenti">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-utensils"></i>
+                </button>
+                
+                <!-- NOOICE tenjin (Cafe/Brunch) -->
+                <button class="pin-marker cafe-pin" style="top: 68%; left: 48%;" data-spot="nooice">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-mug-hot"></i>
+                </button>
+                
+                <!-- Hakata Station Area / Ooyama (Food) -->
+                <button class="pin-marker food-pin" style="top: 50%; left: 98%;" data-spot="oyama_hakata">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-utensils"></i>
+                </button>
+
+                <!-- Yakitori Hachibei Tenjin (Food) -->
+                <button class="pin-marker food-pin" style="top: 72%; left: 54%;" data-spot="hachibei_tenjin">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-utensils"></i>
+                </button>
+                
+                <!-- Toriden Yakuin Main Store (Food/Mizutaki) -->
+                <button class="pin-marker food-pin" style="top: 90%; left: 42%;" data-spot="toriden_yakuin">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-utensils"></i>
+                </button>
+                
+                <!-- Yakiniku Bakuro Yakuin (Food/Yakiniku) -->
+                <button class="pin-marker food-pin" style="top: 92%; left: 35%;" data-spot="bakuro_yakuin">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-utensils"></i>
+                </button>
+                
+                <!-- Hyotan Sushi Main Store (Food/Sushi) -->
+                <button class="pin-marker food-pin" style="top: 40%; left: 63%;" data-spot="hyotan_sushi">
+                    <span class="pin-pulse"></span>
+                    <i class="fa-solid fa-utensils"></i>
                 </button>
             </div>
 
@@ -158,6 +235,7 @@
                 <button class="filter-btn active" data-filter="all">전체</button>
                 <button class="filter-btn" data-filter="cafe"><i class="fa-solid fa-mug-hot"></i> 카페/빵</button>
                 <button class="filter-btn" data-filter="beauty"><i class="fa-solid fa-wand-magic-sparkles"></i> 뷰티/스파</button>
+                <button class="filter-btn" data-filter="food"><i class="fa-solid fa-utensils"></i> 맛집</button>
             </div>
 
             <!-- Day Tab navigation -->
@@ -198,14 +276,22 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item" data-category="food" data-spot-id="yatai">
                         <div class="timeline-checkbox">
                             <input type="checkbox" id="task-d1-2">
                         </div>
-                        <div class="timeline-icon hotel"><i class="fa-solid fa-hotel"></i></div>
+                        <div class="timeline-icon food"><i class="fa-solid fa-utensils"></i></div>
                         <div class="timeline-content">
-                            <h4>체크인 & 저녁 식사</h4>
-                            <p class="desc">숙소(야쿠인/텐진/하카타 인근) 체크인 후 주변 로컬 이자카야 또는 명란 요리 전문점에서 저녁 식사.</p>
+                            <div class="content-header">
+                                <h4>저녁 식사: 나카스 야타이(포장마차) 거리</h4>
+                                <span class="tag tag-food">맛집</span>
+                            </div>
+                            <p class="desc">나카강변의 화려한 야경을 감상하며 낭만 넘치는 포장마차 감성을 느껴보세요. 인기 메뉴인 명란구이나 라멘에 생맥주 한잔하기 좋습니다. (카드 결제 불가, 현금 필수)</p>
+                            <p class="menu-highlight">대표 메뉴: 명란 계란말이, 하카타 돈코츠 라멘 & 야키토리</p>
+                            <div class="actions">
+                                <button class="view-on-map-btn" data-spot="yatai">지도에서 보기</button>
+                                <a href="https://maps.google.com/?q=Nakasu+Yatai+Street" target="_blank" class="gmap-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Google Maps</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -250,9 +336,28 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item" data-category="cafe" data-spot-id="takasago">
+                    <div class="timeline-item" data-category="cafe" data-spot-id="nooice">
                         <div class="timeline-checkbox">
                             <input type="checkbox" id="task-d2-3">
+                        </div>
+                        <div class="timeline-icon cafe"><i class="fa-solid fa-mug-hot"></i></div>
+                        <div class="timeline-content">
+                            <div class="content-header">
+                                <h4>점심 식사: NOOICE tenjin</h4>
+                                <span class="tag tag-cafe">카페 & 브런치</span>
+                            </div>
+                            <p class="desc">호주 멜버른 스타일의 브런치 카페. 아내의 소중한 힐링 푸드인 플랫 화이트 커피와 시그니처 크림 브륄레 팬케이크로 든든한 점심 식사를 즐겨보세요.</p>
+                            <p class="menu-highlight">대표 메뉴: 크림 브륄레 팬케이크, 플랫 화이트 & 아보카도 토스트</p>
+                            <div class="actions">
+                                <button class="view-on-map-btn" data-spot="nooice">지도에서 보기</button>
+                                <a href="https://maps.google.com/?q=NOOICE+tenjin" target="_blank" class="gmap-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Google Maps</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" data-category="cafe" data-spot-id="takasago">
+                        <div class="timeline-checkbox">
+                            <input type="checkbox" id="task-d2-4">
                         </div>
                         <div class="timeline-icon cafe"><i class="fa-solid fa-mug-hot"></i></div>
                         <div class="timeline-content">
@@ -269,17 +374,61 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item" data-category="beauty">
+                    <div class="timeline-item" data-category="beauty" data-spot-id="ainz_tulpe">
                         <div class="timeline-checkbox">
-                            <input type="checkbox" id="task-d2-4">
+                            <input type="checkbox" id="task-d2-5">
                         </div>
                         <div class="timeline-icon beauty"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
                         <div class="timeline-content">
                             <div class="content-header">
-                                <h4>코스메 키친 & 백화점 쇼핑 (텐진)</h4>
+                                <h4>메이크업 쇼핑: 아인즈&토르페 텐진西通り점</h4>
                                 <span class="tag tag-beauty">뷰티 쇼핑</span>
                             </div>
-                            <p class="desc">텐진 파르코의 코스메 키친에서 천연 메이크업 브랜드(셀보크, 투원)를 둘러보고, 이와타야 백화점에서 SHIRO 사봉 향수 및 THREE 클렌징 오일 득템.</p>
+                            <p class="desc">일본 현지인들이 극찬하는 대형 드럭스토어 화장품 숍. 캔메이크, 케이트, 세잔느, 엑셀 등 고성능 프치프라 브랜드들을 직접 테스트하고 자유롭게 쇼핑할 수 있습니다.</p>
+                            <p class="menu-highlight">추천 브랜드: CANMAKE, KATE, CEZANNE, EXCEL</p>
+                            <div class="actions">
+                                <button class="view-on-map-btn" data-spot="ainz_tulpe">지도에서 보기</button>
+                                <a href="https://maps.google.com/?q=Ainz+%26+Tulpe+Fukuoka+Tenjin" target="_blank" class="gmap-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Google Maps</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" data-category="beauty" data-spot-id="iwataya">
+                        <div class="timeline-checkbox">
+                            <input type="checkbox" id="task-d2-6">
+                        </div>
+                        <div class="timeline-icon beauty"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+                        <div class="timeline-content">
+                            <div class="content-header">
+                                <h4>백화점 색조 투어: 이와타야 & 코스메테리아</h4>
+                                <span class="tag tag-beauty">뷰티 쇼핑</span>
+                            </div>
+                            <p class="desc">이와타야 백화점 본관 1층 메이크업 포에버 매장을 방문하거나, 바로 옆 솔라리아 스테이지 코스메테리아에서 KOSE의 어딕션, 질 스튜어트 등 프리미엄 색조 브랜드를 체험해 보세요.</p>
+                            <p class="menu-highlight">주요 브랜드: MAKE UP FOR EVER, Addiction, Jill Stuart</p>
+                            <div class="actions">
+                                <button class="view-on-map-btn" data-spot="iwataya">지도에서 보기</button>
+                                <a href="https://maps.google.com/?q=Iwataya+Main+Store" target="_blank" class="gmap-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Google Maps</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item" data-category="food" data-spot-id="ikke_haruyoshi">
+                        <div class="timeline-checkbox">
+                            <input type="checkbox" id="task-d2-7">
+                        </div>
+                        <div class="timeline-icon food"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="timeline-content">
+                            <div class="content-header">
+                                <h4>저녁 식사: 모츠나베 이케이 하루요시 본점</h4>
+                                <span class="tag tag-food">맛집</span>
+                            </div>
+                            <p class="desc">국산 와규의 신선한 소창만을 엄선하여 잡내가 전혀 없는 깔끔한 국물 맛. 숯불에 초벌 구이한 구운 모츠나베가 시그니처이며, 텐진남역과 나카스 주변에서 현지인들이 줄 서는 진짜 로컬 맛집입니다.</p>
+                            <p class="menu-highlight">대표 메뉴: 구운 모츠나베 (간장 스프), 시메 짬뽕면</p>
+                            <div class="actions">
+                                <button class="view-on-map-btn" data-spot="ikke_haruyoshi">지도에서 보기</button>
+                                <a href="https://www.hotpepper.jp/strJ000028171/" target="_blank" class="gmap-link" style="background-color: #e63946; color: #fff;"><i class="fa-solid fa-calendar-check"></i> Hotpepper 예약하기</a>
+                                <a href="https://maps.google.com/?q=motsunabe+Ikkei+Haruyoshi" target="_blank" class="gmap-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Google Maps</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -300,9 +449,28 @@
                         </div>
                     </div>
 
-                    <div class="timeline-item">
+                    <div class="timeline-item" data-category="food" data-spot-id="oyama_hakata">
                         <div class="timeline-checkbox">
                             <input type="checkbox" id="task-d3-2">
+                        </div>
+                        <div class="timeline-icon food"><i class="fa-solid fa-utensils"></i></div>
+                        <div class="timeline-content">
+                            <div class="content-header">
+                                <h4>점심 식사 & 기념품 쇼핑: 하카타역</h4>
+                                <span class="tag tag-food">맛집 & 쇼핑</span>
+                            </div>
+                            <p class="desc">하카타역 KITTE 9층 오야마에서 정갈한 룸 좌석에서 고소한 미소 모츠나베 정식을 맛보세요. 식사 후 역 내 한큐 백화점과 아뮤플라자 식품관에서 야마야 명란젓, 후쿠사야 카스테라 등 기념품을 쇼핑합니다.</p>
+                            <p class="menu-highlight">대표 메뉴: 오야마 미소 모츠나베 정식, 후쿠사야 카스테라, 명란젓</p>
+                            <div class="actions">
+                                <button class="view-on-map-btn" data-spot="oyama_hakata">지도에서 보기</button>
+                                <a href="https://maps.google.com/?q=Motsunabe+Ooyama+KITTE+Hakata" target="_blank" class="gmap-link"><i class="fa-solid fa-arrow-up-right-from-square"></i> Google Maps</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-checkbox">
+                            <input type="checkbox" id="task-d3-3">
                         </div>
                         <div class="timeline-icon airport"><i class="fa-solid fa-plane-departure"></i></div>
                         <div class="timeline-content">
@@ -323,5 +491,6 @@
 
     <!-- Custom JS -->
     <script src="app.js"></script>
+    <script src="verification.js"></script>
 </body>
 </html>

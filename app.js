@@ -40,6 +40,114 @@ const SPOTS_DATA = {
         image: "assets/latte_and_bread.png",
         day: "Day 2 (오후)",
         gmap: "https://maps.google.com/?q=Good+up+Coffee+Fukuoka"
+    },
+    ainz_tulpe: {
+        name: "아인즈&토르페 텐진 니시도리점",
+        category: "beauty",
+        desc: "텐진 최대 규모의 2층 코스메틱 전문 숍입니다. CANMAKE, KATE, CEZANNE, EXCEL 등 일본 현지의 모든 프치프라(저가/고성능) 드럭스토어 화장품 브랜드를 직접 테스트하고 비교 구매할 수 있습니다.",
+        menu: "일본 인기 드럭스토어 화장품 & 메이크업 툴",
+        image: "assets/fukuoka_travel_map.png",
+        day: "Day 2 (오후)",
+        gmap: "https://maps.google.com/?q=Ainz+%26+Tulpe+Fukuoka+Tenjin"
+    },
+    iwataya: {
+        name: "이와타야 백화점 본점",
+        category: "beauty",
+        desc: "본관 1층에 텐진 유일의 '메이크업 포에버' 매장이 입점해 있습니다. 그 외에도 RMK, SUQQU, THREE, 코스메 데코르테 등 프로 뷰티 어드바이저들의 전문 상담과 테스팅을 제공하는 백화점 브랜드들이 집결해 있습니다.",
+        menu: "메이크업 포에버, RMK, SUQQU 및 면세 혜택",
+        image: "assets/fukuoka_travel_map.png",
+        day: "Day 2 (오후)",
+        gmap: "https://maps.google.com/?q=Iwataya+Main+Store"
+    },
+    cosmeteria: {
+        name: "코스메테리아 (솔라리아 스테이지)",
+        category: "beauty",
+        desc: "KOSE 계열의 뷰티 전문 편집숍입니다. 코스메 데코르테, 어딕션(Addiction), 질 스튜어트 등 국내외 뷰티 매니아들이 사랑하는 중고가 메이크업 브랜드를 번잡한 백화점 매장 밖에서 한 곳에 비교하며 테스트하기 좋은 공간입니다.",
+        menu: "어딕션 아이섀도우, 질 스튜어트 블러셔",
+        image: "assets/fukuoka_travel_map.png",
+        day: "Day 2 (오후)",
+        gmap: "https://maps.google.com/?q=Cosmeteria+Solaria+Stage"
+    },
+    ikke_haruyoshi: {
+        name: "모츠나베 이케이 하루요시 본점",
+        category: "food",
+        desc: "국산 와규의 신선한 소창만을 엄선하여 특유의 잡내가 전혀 없는 깔끔한 국물 맛을 자랑합니다. 숯불에 초벌 구이한 구운 모츠나베가 시그니처이며, 텐진남역과 나카스 주변에서 현지인들이 줄 서는 진짜 로컬 맛집입니다.",
+        menu: "구운 모츠나베 (쇼유 베이스) & 시메 짬뽕면",
+        image: "assets/latte_and_bread.png",
+        day: "Day 2 (저녁 - 예약필수)",
+        gmap: "https://maps.google.com/?q=motsunabe+Ikkei+Haruyoshi"
+    },
+    yatai: {
+        name: "나카스 야타이(포장마차) 거리",
+        category: "food",
+        desc: "나카강을 끼고 쭉 늘어선 후쿠오카의 대표 명물 포장마차들입니다. 명란 구이, 명란 치즈 계란말이, 돼지꼬치 구이와 따뜻한 도톤보리식 오뎅에 시원한 나마비루(생맥주)를 곁들이며 강변 야경과 정취를 느낄 수 있습니다. (카드 사용 불가, 현금 필수)",
+        menu: "명란 계란말이, 하카타 라멘, 야키토리 & 나마비루",
+        image: "assets/latte_and_bread.png",
+        day: "Day 1 (저녁)",
+        gmap: "https://maps.google.com/?q=Nakasu+Yatai+Street"
+    },
+    rakutenti: {
+        name: "원조 모츠나베 라쿠텐치 텐진 총본점",
+        category: "food",
+        desc: "48년 전통의 하카타 모츠나베 원조 브랜드입니다. 산더미처럼 쌓아 올린 부추와 6가지 국산 내장을 특제 비전 간장 수프에 끓여 먹습니다. 양이 아주 푸짐하고 가격이 합리적이며 텐진역 바로 옆이라 접근성이 뛰어납니다.",
+        menu: "원조 모츠나베 & 시메 짬뽕면 사리",
+        image: "assets/latte_and_bread.png",
+        day: "Day 2 (저녁 대안)",
+        gmap: "https://maps.google.com/?q=Rakutenti+Tenjin+Sohonten"
+    },
+    nooice: {
+        name: "NOOICE tenjin (호주 스타일 브런치)",
+        category: "cafe",
+        desc: "호주 멜버른 스타일의 감각적인 브런치 전문점으로, 아내의 추억이 담긴 현지 힐링 푸드를 제공합니다. 달콤하고 바삭하게 구워낸 브뤼레 팬케이크와 고소한 플랫 화이트 라떼가 최고 인기를 끄는 감성 넘치는 곳입니다.",
+        menu: "브뤼레 팬케이크, 아보카도 토스트 & 플랫 화이트",
+        image: "assets/latte_and_bread.png",
+        day: "Day 2 (오전 브런치)",
+        gmap: "https://maps.google.com/?q=NOOICE+tenjin"
+    },
+    oyama_hakata: {
+        name: "모츠나베 오야마 KITTE博多점",
+        category: "food",
+        desc: "진하고 고소한 규슈 미소(된장) 베이스의 모츠나베로 유명한 유명 브랜드입니다. 하카타역과 바로 연결되는 KITTE 빌딩 9층에 위치하여 출국 직전 점심 식사로 이상적입니다. 전 좌석 개별실/칸막이 구조라 조용히 식사할 수 있습니다.",
+        menu: "미소 모츠나베 정식 & 하카타 한입 교자",
+        image: "assets/latte_and_bread.png",
+        day: "Day 3 (점심)",
+        gmap: "https://maps.google.com/?q=Motsunabe+Ooyama+KITTE+Hakata"
+    },
+    hachibei_tenjin: {
+        name: "焼とりの八兵衛 天神店 (야키토리 하치베에)",
+        category: "food",
+        desc: "하카타식 야키토리의 대명사입니다. 엄선된 닭고기 꼬치와 일본 현지인들이 필수로 주문하는 고소한 삼겹살 꼬치(豚バラ)를 맛볼 수 있습니다. 트렌디한 인테리어와 활기찬 로컬 맛집 분위기입니다.",
+        menu: "하카타 삼겹살 꼬치, 츠쿠네 & 시원한 생맥주",
+        image: "assets/latte_and_bread.png",
+        day: "Day 2 (저녁 후보 - 예약필수)",
+        gmap: "https://maps.google.com/?q=Yakitori+Hachibei+Tenjin"
+    },
+    toriden_yakuin: {
+        name: "博多水炊き とり田 薬院本店 (토리덴 미즈타키)",
+        category: "food",
+        desc: "후쿠오카의 3대 명물 요리 중 하나인 미즈타키(닭 전골) 전문점입니다. 오랜 시간 푹 고아낸 뽀얗고 진한 닭 육수에 신선한 닭고기와 야채를 넣어 먹는 보양식으로, 커플 여행에 추천하는 깔끔한 분위기입니다.",
+        menu: "미즈타키 코스, 닭고기 가라아게 & 사케",
+        image: "assets/latte_and_bread.png",
+        day: "Day 2 (저녁 후보 - 예약권장)",
+        gmap: "https://maps.google.com/?q=Toriden+Yakuin"
+    },
+    bakuro_yakuin: {
+        name: "焼肉バクロ 薬院本店 (야키니쿠 바쿠로)",
+        category: "food",
+        desc: "가고시마현 목장 직영 와규 전문 야키니쿠 맛집입니다. 최상급 흑우의 다양한 부위를 직화 구이로 가성비 있게 즐길 수 있어, 후쿠오카 현지 젊은 커플들에게 압도적인 지지를 받는 세련된 고깃집입니다.",
+        menu: "바쿠로 와규 모듬 세트, 우설 구이 & 와인",
+        image: "assets/latte_and_bread.png",
+        day: "Day 2 (저녁 후보 - 예약권장)",
+        gmap: "https://maps.google.com/?q=Yakiniku+Bakuro+Yakuin"
+    },
+    hyotan_sushi: {
+        name: "ひょうたん寿司 본점 (효탄스시)",
+        category: "food",
+        desc: "텐진 한복판에 위치한 현지 최고 인기 대중 스시집입니다. 두툼하고 신선한 제철 생선 초밥과 바삭한 게살 크로켓이 명물입니다. 인터넷 예약이 불가능하며, 늘 긴 대기 행렬이 이어지는 로컬 대표 맛집입니다.",
+        menu: "특선 모듬 스시 세트, 게살 크로켓 & 하이볼",
+        image: "assets/latte_and_bread.png",
+        day: "Day 2 (점심/저녁 후보 - 예약불가)",
+        gmap: "https://maps.google.com/?q=Hyotan+Sushi+Fukuoka"
     }
 };
 
@@ -91,8 +199,18 @@ function setupMapPins() {
 
             // Fill card details
             spotName.textContent = data.name;
-            spotCategory.textContent = data.category === 'cafe' ? 'Cafe & Bread' : 'Beauty & Spa';
-            spotCategory.className = `spot-category ${data.category === 'cafe' ? 'tag-cafe' : 'tag-beauty'}`;
+            
+            if (data.category === 'cafe') {
+                spotCategory.textContent = 'Cafe & Bread';
+                spotCategory.className = 'spot-category tag-cafe';
+            } else if (data.category === 'beauty') {
+                spotCategory.textContent = 'Beauty & Spa';
+                spotCategory.className = 'spot-category tag-beauty';
+            } else if (data.category === 'food') {
+                spotCategory.textContent = 'Food & Restaurant';
+                spotCategory.className = 'spot-category tag-food';
+            }
+            
             spotMenuText.textContent = data.menu;
             spotDesc.textContent = data.desc;
             spotImg.src = data.image;
